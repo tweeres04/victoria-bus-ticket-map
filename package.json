@@ -1,0 +1,21 @@
+{
+	"dependencies": {
+		"axios": "^0.18.0",
+		"dotenv": "^6.2.0",
+		"scrape-it": "^5.1.4"
+	},
+	"devDependencies": {
+		"eslint": "^5.14.1",
+		"html-webpack-plugin": "^4.0.0-beta.5",
+		"webpack": "^4.29.5",
+		"webpack-cli": "^3.2.3",
+		"webpack-dev-server": "^3.2.0"
+	},
+	"scripts": {
+		"debug": "node --inspect scrape.js",
+		"start:scrape": "node src/scrape.js",
+		"build": "yarn clean && webpack",
+		"start": "webpack-dev-server --inline",
+		"clean": "rm -rf dist"
+	}
+}
