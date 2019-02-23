@@ -16,6 +16,8 @@
 		"start:scrape": "node src/scrape.js",
 		"build": "yarn clean && webpack",
 		"start": "webpack-dev-server --inline",
-		"clean": "rm -rf dist"
-	}
+		"clean": "rm -rf dist",
+		"deploy": "./scripts/deploy.sh"
+	},
+	"license": "MIT"
 }

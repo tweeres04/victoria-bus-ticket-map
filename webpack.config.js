@@ -12,6 +12,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: 'src/index.html',
+			inject: false,
 			googleMapsKey: process.env.GOOGLE_MAPS_KEY
 		})
 	]
