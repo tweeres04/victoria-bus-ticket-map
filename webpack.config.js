@@ -9,6 +9,14 @@ module.exports = {
 		filename: '[name].[hash].js',
 		path: path.join(__dirname, 'dist')
 	},
+	module: {
+		rules: [
+			{
+				test: /\.(png|svg|jpg|gif)$/,
+				use: ['file-loader']
+			}
+		]
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: 'src/index.html',
