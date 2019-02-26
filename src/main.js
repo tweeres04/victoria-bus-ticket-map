@@ -3,6 +3,7 @@
 const locations = require('../locations.json');
 const locationImage = require('./location.png');
 
+const locationSize = 32;
 const victoriaLatLng = { lat: 48.425278, lng: -123.3651478 };
 
 window.initMap = function initMap() {
@@ -16,7 +17,13 @@ window.initMap = function initMap() {
 					map,
 					position: { lat, lng },
 					title: 'Your location',
-					icon: locationImage
+					icon: {
+						url: locationImage,
+						scaledSize: {
+							width: locationSize,
+							height: locationSize
+						}
+					}
 				});
 				locationMarker.addListener('click', () => {
 					infoWindow.open(map, locationMarker);
