@@ -1,9 +1,12 @@
 require('dotenv').config();
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+
+const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
-	mode: 'production',
+	mode,
 	entry: './src/main.js',
 	output: {
 		filename: '[name].[hash].js',
@@ -22,6 +25,10 @@ module.exports = {
 			template: 'src/index.html',
 			inject: false,
 			googleMapsKey: process.env.GOOGLE_MAPS_KEY
+		}),
+		new WorkboxPlugin.GenerateSW({
+			clientsClaim: true,
+			skipWaiting: true
 		})
 	]
 };

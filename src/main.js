@@ -1,5 +1,18 @@
 /* global google */
 
+if (process.env.NODE_ENV == 'production' && 'serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+		navigator.serviceWorker
+			.register('/service-worker.js')
+			.then(() => {
+				console.log('service worker registered');
+			})
+			.catch(err => {
+				console.log('service worker registration failed', err);
+			});
+	});
+}
+
 const locations = require('../locations.json');
 const locationImage = require('./location.png');
 
