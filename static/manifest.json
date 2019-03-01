@@ -1,0 +1,15 @@
+{
+	"short_name": "Bus Tickets",
+	"name": "Victoria Bus Ticket Map",
+	"icons": [
+		{
+			"src": "/static/bus-stop.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#EA4335",
+	"background_color": "#EA4335"
+}
