@@ -10,25 +10,27 @@ module.exports = {
 	entry: './src/main.js',
 	output: {
 		filename: '[name].[hash].js',
-		path: path.join(__dirname, 'dist')
+		path: path.join(__dirname, 'dist'),
 	},
 	module: {
 		rules: [
 			{
 				test: /\.(png|svg|jpg|gif)$/,
-				use: ['file-loader']
-			}
-		]
+				use: ['file-loader'],
+			},
+		],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: 'src/index.html',
 			inject: false,
-			googleMapsKey: process.env.GOOGLE_MAPS_KEY
+			googleMapsKey: process.env.GOOGLE_MAPS_KEY,
 		}),
-		new WorkboxPlugin.GenerateSW({
-			clientsClaim: true,
-			skipWaiting: true
-		})
-	]
+		mode === 'production'
+			? new WorkboxPlugin.GenerateSW({
+					clientsClaim: true,
+					skipWaiting: true,
+			  })
+			: null,
+	].filter(Boolean),
 };

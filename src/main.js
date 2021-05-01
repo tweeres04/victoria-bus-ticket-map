@@ -7,24 +7,26 @@ if (process.env.NODE_ENV == 'production' && 'serviceWorker' in navigator) {
 			.then(() => {
 				console.log('service worker registered');
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.log('service worker registration failed', err);
 			});
 	});
 }
 
 const locations = require('../locations.json');
-const locationImage = require('./location.png');
+const locationImage = require('./location.png').default;
 
 const locationSize = 32;
 const victoriaLatLng = { lat: 48.425278, lng: -123.3651478 };
 
+let openInfoWindows = [];
+
 window.initMap = function initMap() {
 	if ('geolocation' in navigator) {
-		navigator.geolocation.getCurrentPosition(
+		navigator.geolocation.watchPosition(
 			({ coords: { latitude: lat, longitude: lng } }) => {
 				const infoWindow = new google.maps.InfoWindow({
-					content: '<p><strong>Your location</strong></p>'
+					content: '<p>Your location</p>',
 				});
 				const locationMarker = new google.maps.Marker({
 					map,
@@ -34,9 +36,9 @@ window.initMap = function initMap() {
 						url: locationImage,
 						scaledSize: {
 							width: locationSize,
-							height: locationSize
-						}
-					}
+							height: locationSize,
+						},
+					},
 				});
 				locationMarker.addListener('click', () => {
 					infoWindow.open(map, locationMarker);
@@ -49,20 +51,25 @@ window.initMap = function initMap() {
 
 	const map = new google.maps.Map(document.getElementById('map'), {
 		center: victoriaLatLng,
-		zoom: 15
+		zoom: 15,
 	});
 
 	locations.forEach(({ lat, lng, name, address }) => {
 		const infoWindow = new google.maps.InfoWindow({
-			content: `<p><strong>${name}</strong></p><p>${address}</p>`
+			content: `<p><strong>${name}</strong></p><p>${address}</p>`,
 		});
 		const marker = new google.maps.Marker({
 			map,
 			position: { lat, lng },
-			title: `${name}\n${address}`
+			title: `${name}\n${address}`,
 		});
 		marker.addListener('click', () => {
 			infoWindow.open(map, marker);
+			openInfoWindows.forEach((openInfoWindow) => {
+				openInfoWindow.close();
+			});
+			openInfoWindows = [];
+			openInfoWindows.push(infoWindow);
 		});
 	});
 };
