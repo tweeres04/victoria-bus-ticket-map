@@ -25,12 +25,14 @@ function Home() {
 								</Link>
 							</div>
 							<div className="column has-text-centered">
-								<a href="/map/">
-									<Image
-										src={heroImage}
-										alt="Map with markers showing where to buy bus tickets in Victoria"
-									/>
-								</a>
+								<Link href="/map">
+									<a>
+										<Image
+											src={heroImage}
+											alt="Map with markers showing where to buy bus tickets in Victoria"
+										/>
+									</a>
+								</Link>
 							</div>
 						</div>
 					</div>
