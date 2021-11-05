@@ -1,5 +1,7 @@
 declare const google;
 
+import Link from 'next/link';
+
 import { Loader } from '@googlemaps/js-api-loader';
 
 import scrape from '../../lib/scrape';
@@ -87,6 +89,7 @@ export default function Map({ locations }) {
 			body {
 				margin: 0;
 				font-size: 1.5em;
+				font-family: sans-serif;
 			}
 
 			#map {
@@ -99,8 +102,17 @@ export default function Map({ locations }) {
 					height: 100vh;
 				}
 			}
+
+			#backLink {
+				position: absolute;
+				bottom: 1.5rem;
+				left: 1rem;
+			}
 		`}</style>
 			<div id="map" ref={mapRef}></div>
+			<Link href="/">
+				<a id="backLink">Back to homepage</a>
+			</Link>
 		</>
 	);
 }
