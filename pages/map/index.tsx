@@ -86,12 +86,6 @@ export default function Map({ locations }) {
 	return (
 		<>
 			<style>{`
-			body {
-				margin: 0;
-				font-size: 1.5em;
-				font-family: sans-serif;
-			}
-
 			#map {
 				width: 100%;
 				height: 90vh;

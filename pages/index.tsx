@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import 'bulma/css/bulma.min.css';
 import heroImage from '../assets/hero.png';
 
 function Home() {
 	return (
 		<>
-			<div className="hero is-halfheight">
+			<div className="hero is-halfheight is-primary">
 				<div className="hero-body">
 					<div className="container">
 						<div className="columns is-vcentered">
@@ -17,11 +16,15 @@ function Home() {
 									Greater Victoria
 								</h1>
 								<h2 className="subtitle">
-									Every spot easily findable on a map. No more scrolling through
-									a huge list.
+									Every spot easily findable on a map. No scrolling through{' '}
+									<a href="https://bctransit.com/victoria/fares/where-to-buy">
+										BC Transit&apos;s huge list.
+									</a>
 								</h2>
 								<Link href="/map">
-									<a className="button is-primary is-large">See the map</a>
+									<a className="button is-primary is-large is-inverted">
+										See the map →
+									</a>
 								</Link>
 							</div>
 							<div className="column has-text-centered">
@@ -38,6 +41,14 @@ function Home() {
 					</div>
 				</div>
 			</div>
+			<footer className="footer">
+				<div className="content has-text-centered">
+					<div>Victoria Bus Ticket Map by</div>
+					<div>
+						<a href="https://tweeres.ca">Tyler Weeres</a>
+					</div>
+				</div>
+			</footer>
 		</>
 	);
 }
