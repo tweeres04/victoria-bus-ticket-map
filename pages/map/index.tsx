@@ -50,12 +50,14 @@ export default function Map({ locations }) {
 
 			if ('geolocation' in navigator) {
 				let positionSet = false;
+				let locationMarker;
 				navigator.geolocation.watchPosition(
 					({ coords: { latitude: lat, longitude: lng } }) => {
+						locationMarker?.setMap(null)
 						const infoWindow = new google.maps.InfoWindow({
 							content: '<p>Your location</p>',
 						});
-						const locationMarker = new google.maps.Marker({
+						locationMarker = new google.maps.Marker({
 							map,
 							position: { lat, lng },
 							title: 'Your location',
