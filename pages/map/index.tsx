@@ -31,7 +31,7 @@ export default function Map({ locations }) {
 
 			locations.forEach(({ lat, lng, name, address }) => {
 				const infoWindow = new google.maps.InfoWindow({
-					content: `<p><strong>${name}</strong></p><p>${address}</p>`,
+					content: `<p><strong>${name}</strong></p><p><a href="https://google.ca/maps/place/${address}" target="_blank">${address}</a></p>`,
 				});
 				const marker = new google.maps.Marker({
 					map,
@@ -53,7 +53,7 @@ export default function Map({ locations }) {
 				let locationMarker;
 				navigator.geolocation.watchPosition(
 					({ coords: { latitude: lat, longitude: lng } }) => {
-						locationMarker?.setMap(null)
+						locationMarker?.setMap(null);
 						const infoWindow = new google.maps.InfoWindow({
 							content: '<p>Your location</p>',
 						});
