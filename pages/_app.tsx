@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import Script from 'next/script';
 
 import '../lib/styles.scss';
 
@@ -20,6 +21,21 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 			<Component {...pageProps} />
+			{/* Global site tag (gtag.js) - Google Analytics */}
+			<Script
+				async
+				src="https://www.googletagmanager.com/gtag/js?id=G-PLDECJ37ZE"
+			></Script>
+			<Script
+				id="google-analytics-inline"
+				dangerouslySetInnerHTML={{
+					__html: `window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+
+				gtag('config', 'G-PLDECJ37ZE');`,
+				}}
+			></Script>
 		</>
 	);
 }
