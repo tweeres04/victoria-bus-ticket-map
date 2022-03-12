@@ -31,7 +31,16 @@ export default function Map({ locations }) {
 
 			locations.forEach(({ lat, lng, name, address }) => {
 				const infoWindow = new google.maps.InfoWindow({
-					content: `<p><strong>${name}</strong></p><p><a href="https://google.ca/maps/place/${address}" target="_blank">${address}</a></p>`,
+					content: `
+						<div class="p-3">
+							<h1 class="title">
+								<strong>${name}</strong>
+							</h1>
+							<h3 class="subtitle">
+								<a href="https://google.ca/maps/place/${address}" target="_blank">${address}</a>
+							</h3>
+						</div>
+					`,
 				});
 				const marker = new google.maps.Marker({
 					map,
