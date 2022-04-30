@@ -62,7 +62,7 @@ export default function Map({ locations }) {
 				let locationMarker;
 				navigator.geolocation.watchPosition(
 					({ coords: { latitude: lat, longitude: lng } }) => {
-						locationMarker?.setMap(null);
+						const oldMarker = locationMarker;
 						const infoWindow = new google.maps.InfoWindow({
 							content: '<p>Your location</p>',
 						});
@@ -81,6 +81,7 @@ export default function Map({ locations }) {
 						locationMarker.addListener('click', () => {
 							infoWindow.open(map, locationMarker);
 						});
+						oldMarker?.setMap(null);
 
 						if (!positionSet) {
 							map.setCenter({ lat, lng });
