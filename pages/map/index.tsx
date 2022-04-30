@@ -58,34 +58,31 @@ export default function Map({ locations }) {
 			});
 
 			if ('geolocation' in navigator) {
-				let positionSet = false;
 				let locationMarker;
 				navigator.geolocation.watchPosition(
 					({ coords: { latitude: lat, longitude: lng } }) => {
-						const oldMarker = locationMarker;
-						const infoWindow = new google.maps.InfoWindow({
-							content: '<p>Your location</p>',
-						});
-						locationMarker = new google.maps.Marker({
-							map,
-							position: { lat, lng },
-							title: 'Your location',
-							icon: {
-								url: locationImage.src,
-								scaledSize: {
-									width: locationSize,
-									height: locationSize,
+						if (locationMarker) {
+							locationMarker.setPosition({ lat, lng });
+						} else {
+							const infoWindow = new google.maps.InfoWindow({
+								content: '<p>Your location</p>',
+							});
+							locationMarker = new google.maps.Marker({
+								map,
+								position: { lat, lng },
+								title: 'Your location',
+								icon: {
+									url: locationImage.src,
+									scaledSize: {
+										width: locationSize,
+										height: locationSize,
+									},
 								},
-							},
-						});
-						locationMarker.addListener('click', () => {
-							infoWindow.open(map, locationMarker);
-						});
-						oldMarker?.setMap(null);
-
-						if (!positionSet) {
+							});
+							locationMarker.addListener('click', () => {
+								infoWindow.open(map, locationMarker);
+							});
 							map.setCenter({ lat, lng });
-							positionSet = true;
 						}
 					}
 				);
