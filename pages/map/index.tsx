@@ -1,4 +1,5 @@
 declare const google;
+declare const gtag: Gtag.Gtag;
 
 import Link from 'next/link';
 
@@ -8,12 +9,19 @@ import scrape from '../../lib/scrape';
 import locationImage from '../../assets/location.png';
 import { useEffect, useRef } from 'react';
 
-export default function Map({ locations }) {
+type Location = {
+	lat: number;
+	lng: number;
+	name: string;
+	address: string;
+};
+
+export default function Map({ locations }: { locations: Location[] }) {
 	const mapRef = useRef();
 	useEffect(() => {
 		async function initializeMap() {
 			const loader = new Loader({
-				apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY,
+				apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
 				version: 'weekly',
 			});
 
@@ -22,7 +30,7 @@ export default function Map({ locations }) {
 			const locationSize = 32;
 			const victoriaLatLng = { lat: 48.425278, lng: -123.3651478 };
 
-			let openInfoWindows = [];
+			let openInfoWindows: google.maps.InfoWindow[] = [];
 
 			const map = new google.maps.Map(mapRef.current, {
 				center: victoriaLatLng,
@@ -54,11 +62,14 @@ export default function Map({ locations }) {
 					});
 					openInfoWindows = [];
 					openInfoWindows.push(infoWindow);
+					gtag('event', 'click_marker', {
+						event_label: name,
+					});
 				});
 			});
 
 			if ('geolocation' in navigator) {
-				let locationMarker;
+				let locationMarker: google.maps.Marker;
 				navigator.geolocation.watchPosition(
 					({ coords: { latitude: lat, longitude: lng } }) => {
 						if (locationMarker) {
@@ -81,6 +92,7 @@ export default function Map({ locations }) {
 							});
 							locationMarker.addListener('click', () => {
 								infoWindow.open(map, locationMarker);
+								gtag('event', 'click_user_location');
 							});
 							map.setCenter({ lat, lng });
 						}
