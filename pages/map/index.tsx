@@ -7,7 +7,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 
 import scrape from '../../lib/scrape';
 import locationImage from '../../assets/location.png';
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
 type Location = {
 	lat: number;
@@ -16,8 +16,7 @@ type Location = {
 	address: string;
 };
 
-export default function Map({ locations }: { locations: Location[] }) {
-	const mapRef = useRef();
+function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 	useEffect(() => {
 		async function initializeMap() {
 			const loader = new Loader({
@@ -45,7 +44,7 @@ export default function Map({ locations }: { locations: Location[] }) {
 								<strong>${name}</strong>
 							</h1>
 							<h3 class="subtitle">
-								<a href="https://google.ca/maps/place/${address}" target="_blank">${address}</a>
+								<a class="directions-link" href="https://google.ca/maps/place/${address}" target="_blank" data-location="${name}">${address}</a>
 							</h3>
 						</div>
 					`,
@@ -99,10 +98,25 @@ export default function Map({ locations }: { locations: Location[] }) {
 					}
 				);
 			}
+
+			document.addEventListener('click', (event) => {
+				const origin = event?.target?.closest('a.directions-link');
+
+				if (origin) {
+					gtag('event', 'click_directions_link', {
+						event_label: origin.dataset.location,
+					});
+				}
+			});
 		}
 
 		initializeMap();
-	}, [locations]);
+	}, [locations, mapRef]);
+}
+
+export default function Map({ locations }: { locations: Location[] }) {
+	const mapRef = useRef<HTMLDivElement>(null);
+	useMap(locations, mapRef);
 
 	return (
 		<>
