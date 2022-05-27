@@ -43,10 +43,16 @@ function Home() {
 			</div>
 			<footer className="footer">
 				<div className="content has-text-centered">
-					<div>Victoria Bus Ticket Map by</div>
-					<div>
+					<p>
+						Victoria Bus Ticket Map by{' '}
 						<a href="https://tweeres.ca">Tyler Weeres</a>
-					</div>
+					</p>
+					<p>
+						<a href="https://github.com/tweeres04/victoria-bus-ticket-map">
+							Source code
+						</a>
+					</p>
+					<p>Icon by Smashicons</p>
 				</div>
 			</footer>
 		</>

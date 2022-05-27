@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<title>A Map of Where to Buy Victoria Bus Tickets and Passes</title>
 				<meta
 					name="description"
-					content="I got annoyed with BC Transit's dumb page for where to buy bus tickets and passes in Victoria, so I scraped all their data and threw it on a map. Icon made by Smashicons"
+					content="I got annoyed with BC Transit's page for where to buy bus tickets and passes in Victoria, so I scraped all their data and threw it on a map."
 				/>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="theme-color" content="#EA4335" />
