@@ -63,7 +63,7 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 					openInfoWindows = [];
 					openInfoWindows.push(infoWindow);
 					gtag('event', 'click_marker', {
-						event_label: name,
+						location_name: name,
 					});
 				});
 			});
@@ -96,6 +96,10 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 							});
 							map.setCenter({ lat, lng });
 						}
+						gtag('set', 'user_properties', {
+							lat,
+							lng,
+						});
 					}
 				);
 			}
@@ -105,7 +109,7 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 
 				if (origin) {
 					gtag('event', 'click_directions_link', {
-						event_label: origin.dataset.location,
+						location_name: origin.dataset.location,
 					});
 				}
 			});
