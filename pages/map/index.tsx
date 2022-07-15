@@ -2,13 +2,13 @@ declare const google;
 declare const gtag: Gtag.Gtag;
 
 import Link from 'next/link';
+import Head from 'next/head';
 
 import { Loader } from '@googlemaps/js-api-loader';
 
 import scrape from '../../lib/scrape';
 import locationImage from '../../assets/location.png';
 import { RefObject, useEffect, useRef } from 'react';
-import Head from 'next/head';
 
 type Location = {
 	lat: number;
@@ -126,6 +126,7 @@ export default function Map({ locations }: { locations: Location[] }) {
 	return (
 		<>
 			<Head>
+				<title>Victoria Bus Ticket Map</title>
 				<meta name="robots" content="noindex" />
 			</Head>
 			<style>{`
