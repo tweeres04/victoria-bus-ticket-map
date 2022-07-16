@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
-import heroImage from '../assets/hero.png';
+import heroImage from '../assets/hero.png'
 
 function Home() {
 	return (
@@ -56,7 +56,7 @@ function Home() {
 				</div>
 			</footer>
 		</>
-	);
+	)
 }
 
-export default Home;
+export default Home

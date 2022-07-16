@@ -1,8 +1,8 @@
-import type { AppProps } from 'next/app';
-import Head from 'next/head';
-import Script from 'next/script';
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
+import Script from 'next/script'
 
-import '../lib/styles.scss';
+import '../lib/styles.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -48,7 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				}}
 			></Script>
 		</>
-	);
+	)
 }
 
-export default MyApp;
+export default MyApp

@@ -1,43 +1,41 @@
-declare const google;
-declare const gtag: Gtag.Gtag;
+declare const google
+declare const gtag: Gtag.Gtag
 
-import Link from 'next/link';
-import Head from 'next/head';
+import Link from 'next/link'
+import Head from 'next/head'
 
-import { Loader } from '@googlemaps/js-api-loader';
+import { Loader } from '@googlemaps/js-api-loader'
 
-import scrape from '../../lib/scrape';
-import locationImage from '../../assets/location.png';
-import { RefObject, useEffect, useRef } from 'react';
+import scrape from '../../lib/scrape'
+import locationImage from '../../assets/location.png'
+import { RefObject, useEffect, useRef } from 'react'
 
 type Location = {
-	lat: number;
-	lng: number;
-	name: string;
-	address: string;
-};
+	lat: number
+	lng: number
+	name: string
+	address: string
+}
 
 function useSendDisplayModeToAnalytics() {
 	// From https://web.dev/customize-install/#detect-launch-type
 	function getPWADisplayMode() {
-		const isStandalone = window.matchMedia(
-			'(display-mode: standalone)'
-		).matches;
+		const isStandalone = window.matchMedia('(display-mode: standalone)').matches
 		if (document.referrer.startsWith('android-app://')) {
-			return 'twa';
+			return 'twa'
 		} else if (navigator.standalone || isStandalone) {
-			return 'standalone';
+			return 'standalone'
 		}
-		return 'browser';
+		return 'browser'
 	}
 
 	useEffect(() => {
-		const displayMode = getPWADisplayMode();
+		const displayMode = getPWADisplayMode()
 
 		gtag('set', 'user_properties', {
 			display_mode: displayMode,
-		});
-	}, []);
+		})
+	}, [])
 }
 
 function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
@@ -46,19 +44,19 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 			const loader = new Loader({
 				apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
 				version: 'weekly',
-			});
+			})
 
-			await loader.load();
+			await loader.load()
 
-			const locationSize = 32;
-			const victoriaLatLng = { lat: 48.425278, lng: -123.3651478 };
+			const locationSize = 32
+			const victoriaLatLng = { lat: 48.425278, lng: -123.3651478 }
 
-			let openInfoWindows: google.maps.InfoWindow[] = [];
+			let openInfoWindows: google.maps.InfoWindow[] = []
 
 			const map = new google.maps.Map(mapRef.current, {
 				center: victoriaLatLng,
 				zoom: 15,
-			});
+			})
 
 			locations.forEach(({ lat, lng, name, address }) => {
 				const infoWindow = new google.maps.InfoWindow({
@@ -72,35 +70,35 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 							</h3>
 						</div>
 					`,
-				});
+				})
 				const marker = new google.maps.Marker({
 					map,
 					position: { lat, lng },
 					title: `${name}\n${address}`,
-				});
+				})
 				marker.addListener('click', () => {
-					infoWindow.open(map, marker);
+					infoWindow.open(map, marker)
 					openInfoWindows.forEach((openInfoWindow) => {
-						openInfoWindow.close();
-					});
-					openInfoWindows = [];
-					openInfoWindows.push(infoWindow);
+						openInfoWindow.close()
+					})
+					openInfoWindows = []
+					openInfoWindows.push(infoWindow)
 					gtag('event', 'click_marker', {
 						location_name: name,
-					});
-				});
-			});
+					})
+				})
+			})
 
 			if ('geolocation' in navigator) {
-				let locationMarker: google.maps.Marker;
+				let locationMarker: google.maps.Marker
 				navigator.geolocation.watchPosition(
 					({ coords: { latitude: lat, longitude: lng } }) => {
 						if (locationMarker) {
-							locationMarker.setPosition({ lat, lng });
+							locationMarker.setPosition({ lat, lng })
 						} else {
 							const infoWindow = new google.maps.InfoWindow({
 								content: '<p>Your location</p>',
-							});
+							})
 							locationMarker = new google.maps.Marker({
 								map,
 								position: { lat, lng },
@@ -112,40 +110,40 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 										height: locationSize,
 									},
 								},
-							});
+							})
 							locationMarker.addListener('click', () => {
-								infoWindow.open(map, locationMarker);
-								gtag('event', 'click_user_location');
-							});
-							map.setCenter({ lat, lng });
+								infoWindow.open(map, locationMarker)
+								gtag('event', 'click_user_location')
+							})
+							map.setCenter({ lat, lng })
 						}
 						gtag('set', 'user_properties', {
 							lat,
 							lng,
-						});
+						})
 					}
-				);
+				)
 			}
 
 			document.addEventListener('click', (event) => {
-				const origin = event?.target?.closest('a.directions-link');
+				const origin = event?.target?.closest('a.directions-link')
 
 				if (origin) {
 					gtag('event', 'click_directions_link', {
 						location_name: origin.dataset.location,
-					});
+					})
 				}
-			});
+			})
 		}
 
-		initializeMap();
-	}, [locations, mapRef]);
+		initializeMap()
+	}, [locations, mapRef])
 }
 
 export default function Map({ locations }: { locations: Location[] }) {
-	const mapRef = useRef<HTMLDivElement>(null);
-	useMap(locations, mapRef);
-	useSendDisplayModeToAnalytics();
+	const mapRef = useRef<HTMLDivElement>(null)
+	useMap(locations, mapRef)
+	useSendDisplayModeToAnalytics()
 
 	return (
 		<>
@@ -176,15 +174,15 @@ export default function Map({ locations }: { locations: Location[] }) {
 				<a id="backLink">Back to homepage</a>
 			</Link>
 		</>
-	);
+	)
 }
 
 export async function getStaticProps() {
-	const locations = await scrape();
+	const locations = await scrape()
 
 	return {
 		props: {
 			locations,
 		},
-	};
+	}
 }
