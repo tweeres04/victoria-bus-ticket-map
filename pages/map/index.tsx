@@ -17,6 +17,29 @@ type Location = {
 	address: string;
 };
 
+function useSendDisplayModeToAnalytics() {
+	// From https://web.dev/customize-install/#detect-launch-type
+	function getPWADisplayMode() {
+		const isStandalone = window.matchMedia(
+			'(display-mode: standalone)'
+		).matches;
+		if (document.referrer.startsWith('android-app://')) {
+			return 'twa';
+		} else if (navigator.standalone || isStandalone) {
+			return 'standalone';
+		}
+		return 'browser';
+	}
+
+	useEffect(() => {
+		const displayMode = getPWADisplayMode();
+
+		gtag('set', 'user_properties', {
+			display_mode: displayMode,
+		});
+	}, []);
+}
+
 function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 	useEffect(() => {
 		async function initializeMap() {
@@ -122,6 +145,7 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 export default function Map({ locations }: { locations: Location[] }) {
 	const mapRef = useRef<HTMLDivElement>(null);
 	useMap(locations, mapRef);
+	useSendDisplayModeToAnalytics();
 
 	return (
 		<>
