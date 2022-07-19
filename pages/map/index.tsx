@@ -85,6 +85,7 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 					openInfoWindows.push(infoWindow)
 					gtag('event', 'click_marker', {
 						location_name: name,
+						location_address: address,
 					})
 				})
 			})
@@ -131,6 +132,7 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 				if (origin) {
 					gtag('event', 'click_directions_link', {
 						location_name: origin.dataset.location,
+						location_address: origin.textContent,
 					})
 				}
 			})
