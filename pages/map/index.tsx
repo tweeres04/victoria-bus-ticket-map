@@ -122,6 +122,17 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 							lat,
 							lng,
 						})
+					}, error => {
+						if (error.code === GeolocationPositionError.PERMISSION_DENIED) {
+							gtag('set', 'user_properties', {
+								geo_location_permission_denied: true
+							})
+							return
+						}
+
+						gtag('event', 'exception', {
+							description: error
+						})
 					}
 				)
 			}
