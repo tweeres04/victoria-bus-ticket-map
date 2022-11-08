@@ -21,20 +21,19 @@ function Home() {
 										BC Transit&apos;s huge list.
 									</a>
 								</h2>
-								<Link href="/map">
-									<a className="button is-primary is-large is-inverted">
-										See the map →
-									</a>
+								<Link
+									href="/map"
+									className="button is-primary is-large is-inverted"
+								>
+									See the map →
 								</Link>
 							</div>
 							<div className="column has-text-centered">
 								<Link href="/map">
-									<a>
-										<Image
-											src={heroImage}
-											alt="Map with markers showing where to buy bus tickets in Victoria"
-										/>
-									</a>
+									<Image
+										src={heroImage}
+										alt="Map with markers showing where to buy bus tickets in Victoria"
+									/>
 								</Link>
 							</div>
 						</div>

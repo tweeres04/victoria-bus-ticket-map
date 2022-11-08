@@ -1,4 +1,7 @@
-const withPwa = require('next-pwa')
+const withPwa = require('next-pwa')({
+	dest: 'public',
+	disable: process.env.NODE_ENV !== 'production',
+})
 const { withSentryConfig } = require('@sentry/nextjs')
 
 /** @type {import('next').NextConfig} */
@@ -10,10 +13,6 @@ const moduleExports = {
 	reactStrictMode: true,
 	typescript: {
 		ignoreBuildErrors: true,
-	},
-	pwa: {
-		dest: 'public',
-		disable: process.env.NODE_ENV !== 'production',
 	},
 	sentry: {
 		// Use `hidden-source-map` rather than `source-map` as the Webpack `devtool`

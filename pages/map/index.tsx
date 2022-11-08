@@ -122,16 +122,17 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 							lat,
 							lng,
 						})
-					}, error => {
+					},
+					(error) => {
 						if (error.code === GeolocationPositionError.PERMISSION_DENIED) {
 							gtag('set', 'user_properties', {
-								geo_location_permission_denied: true
+								geo_location_permission_denied: true,
 							})
 							return
 						}
 
 						gtag('event', 'exception', {
-							description: error
+							description: error,
 						})
 					}
 				)
@@ -183,8 +184,8 @@ export default function Map({ locations }: { locations: Location[] }) {
 			}
 		`}</style>
 			<div id="map" ref={mapRef}></div>
-			<Link href="/">
-				<a id="backLink">Back to homepage</a>
+			<Link href="/" id="backLink">
+				Back to homepage
 			</Link>
 		</>
 	)

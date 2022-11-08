@@ -16,6 +16,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
 			<Component {...pageProps} />
+			{/* Global site tag (gtag.js) - Google Analytics */}
+			<Script src="https://www.googletagmanager.com/gtag/js?id=G-PLDECJ37ZE"></Script>
+			<script
+				dangerouslySetInnerHTML={{
+					__html: `window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+
+						gtag('config', 'G-PLDECJ37ZE');
+						console.log('hello')`,
+				}}
+			></script>
 		</>
 	)
 }

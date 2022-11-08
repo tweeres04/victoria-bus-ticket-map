@@ -25,22 +25,6 @@ export default function Document() {
 			<body>
 				<Main />
 				<NextScript />
-				{/* Global site tag (gtag.js) - Google Analytics */}
-				<Script
-					async
-					src="https://www.googletagmanager.com/gtag/js?id=G-PLDECJ37ZE"
-				></Script>
-				<Script
-					id="google-analytics-inline"
-					strategy="beforeInteractive"
-					dangerouslySetInnerHTML={{
-						__html: `window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date());
-
-				gtag('config', 'G-PLDECJ37ZE');`,
-					}}
-				></Script>
 			</body>
 		</Html>
 	)
