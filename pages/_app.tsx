@@ -24,8 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 						function gtag(){dataLayer.push(arguments);}
 						gtag('js', new Date());
 
-						gtag('config', 'G-PLDECJ37ZE');
-						console.log('hello')`,
+						gtag('config', 'G-PLDECJ37ZE');`,
 				}}
 			></script>
 		</>
