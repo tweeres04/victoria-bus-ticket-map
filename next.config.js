@@ -6,10 +6,6 @@ const { withSentryConfig } = require('@sentry/nextjs')
 
 /** @type {import('next').NextConfig} */
 const moduleExports = {
-	i18n: {
-		locales: ['en'],
-		defaultLocale: 'en',
-	},
 	reactStrictMode: true,
 	typescript: {
 		ignoreBuildErrors: true,
