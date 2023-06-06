@@ -150,11 +150,16 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 			})
 		}
 
-		initializeMap()
+		if (mapRef.current) {
+			initializeMap()
+			console.log("there's a map ref")
+		}
+		console.log('initialize map')
 	}, [locations, mapRef])
 }
 
 export default function Map({ locations }: { locations: Location[] }) {
+	console.log({ locations })
 	const mapRef = useRef<HTMLDivElement>(null)
 	useMap(locations, mapRef)
 	useSendDisplayModeToAnalytics()
