@@ -51,11 +51,16 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 
 			const locationSize = 32
 			const victoriaLatLng = { lat: 48.425278, lng: -123.3651478 }
+			const kelownaLatLng = { lat: 49.886335, lng: -119.496603 }
+			const latLng =
+				process.env.NEXT_PUBLIC_CITY === 'kelowna'
+					? kelownaLatLng
+					: victoriaLatLng
 
 			let openInfoWindows: google.maps.InfoWindow[] = []
 
 			const map = new google.maps.Map(mapRef.current, {
-				center: victoriaLatLng,
+				center: latLng,
 				zoom: 15,
 			})
 
@@ -165,10 +170,14 @@ export default function Map({ locations }: { locations: Location[] }) {
 	useMap(locations, mapRef)
 	useSendDisplayModeToAnalytics()
 
+	const city =
+		process.env.NEXT_PUBLIC_CITY === 'kelowna' ? 'Kelowna' : 'Victoria'
+	const title = `${city} Bus Ticket Map`
+
 	return (
 		<>
 			<Head>
-				<title>Victoria Bus Ticket Map</title>
+				<title>{title}</title>
 				<meta name="robots" content="noindex" />
 			</Head>
 			<style>{`

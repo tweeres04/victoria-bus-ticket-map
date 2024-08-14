@@ -5,14 +5,15 @@ import Script from 'next/script'
 import '../lib/styles.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {
+	const cityName =
+		process.env.NEXT_PUBLIC_CITY === 'kelowna' ? 'Kelowna' : 'Victoria'
+	const title = `A Map of Where to Buy ${cityName} Bus Tickets and Passes`
+	const description = `Easily find the nearest place to buy bus passes and tickets in ${cityName}. Every spot easily findable on a map. Umo locations labeled.`
 	return (
 		<>
 			<Head>
-				<title>A Map of Where to Buy Victoria Bus Tickets and Passes</title>
-				<meta
-					name="description"
-					content="Easily find the nearest place to buy bus passes and tickets in Greater Victoria. Every spot easily findable on a map. Umo locations labeled."
-				/>
+				<title>{title}</title>
+				<meta name="description" content={description} />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
 			<Component {...pageProps} />

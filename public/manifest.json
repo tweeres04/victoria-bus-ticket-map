@@ -1,6 +1,6 @@
 {
 	"short_name": "Bus Tickets",
-	"name": "Victoria Bus Ticket Map",
+	"name": "Bus Ticket Map",
 	"icons": [
 		{
 			"src": "/bus-stop.png",
