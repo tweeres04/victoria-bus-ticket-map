@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import heroImage from '../assets/hero.png'
+import heroImage from '../public/hero.png'
 
 function Home() {
 	return (
