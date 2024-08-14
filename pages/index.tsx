@@ -16,10 +16,8 @@ function Home() {
 									Greater Victoria
 								</h1>
 								<h2 className="subtitle">
-									Every spot easily findable on a map. No scrolling through{' '}
-									<a href="https://bctransit.com/victoria/fares/where-to-buy">
-										BC Transit&apos;s huge list.
-									</a>
+									Every spot easily findable on a map. Umo locations clearly
+									labeled.
 								</h2>
 								<Link
 									href="/map"

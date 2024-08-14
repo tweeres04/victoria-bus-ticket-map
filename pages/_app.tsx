@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<title>A Map of Where to Buy Victoria Bus Tickets and Passes</title>
 				<meta
 					name="description"
-					content="I got annoyed with BC Transit's page for where to buy bus tickets and passes in Victoria, so I scraped all their data and threw it on a map."
+					content="Easily find the nearest place to buy bus passes and tickets in Greater Victoria. Every spot easily findable on a map. Umo locations labeled."
 				/>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
