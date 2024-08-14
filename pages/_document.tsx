@@ -18,7 +18,7 @@ export default function Document() {
 				/>
 				<meta
 					property="og:image"
-					content="https://victoriabusticketmap.tweeres.ca/bus-stop.png"
+					content="https://victoriabusticketmap.tweeres.ca/hero.png"
 				/>
 			</Head>
 			<body>
