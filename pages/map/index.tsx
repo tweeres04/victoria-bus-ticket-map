@@ -15,6 +15,7 @@ type Location = {
 	lng: number
 	name: string
 	address: string
+	isUmo: boolean
 }
 
 function useSendDisplayModeToAnalytics() {
@@ -58,17 +59,22 @@ function useMap(locations: Location[], mapRef: RefObject<HTMLDivElement>) {
 				zoom: 15,
 			})
 
-			locations.forEach(({ lat, lng, name, address }) => {
+			locations.forEach(({ lat, lng, name, address, isUmo }) => {
 				const infoWindow = new google.maps.InfoWindow({
 					content: `
-						<div class="p-3">
-							<h1 class="title">
+						<div class="mb-3" style="display: flex; gap: 1rem; place-items: center;">
+							<h1 class="title" style="flex-grow: 1; margin-bottom: 0;">
 								<strong>${name}</strong>
 							</h1>
-							<h3 class="subtitle">
-								<a class="directions-link" href="https://google.ca/maps/place/${address}" target="_blank" data-location="${name}">${address}</a>
-							</h3>
+							${
+								isUmo
+									? ' <span class="tag is-primary is-large" title="Umo available here">Umo</span>'
+									: ''
+							}
 						</div>
+						<h3 class="subtitle">
+							<a class="directions-link" href="https://google.ca/maps/place/${address}" target="_blank" data-location="${name}">${address}</a>
+						</h3>
 					`,
 				})
 				const marker = new google.maps.Marker({
