@@ -18,14 +18,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 			</Head>
 			<Component {...pageProps} />
 			{/* Global site tag (gtag.js) - Google Analytics */}
-			<Script src="https://www.googletagmanager.com/gtag/js?id=G-PLDECJ37ZE"></Script>
+			<Script
+				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_KEY}`}
+			></Script>
 			<script
 				dangerouslySetInnerHTML={{
 					__html: `window.dataLayer = window.dataLayer || [];
 						function gtag(){dataLayer.push(arguments);}
 						gtag('js', new Date());
 
-						gtag('config', 'G-PLDECJ37ZE');`,
+						gtag('config', '${process.env.NEXT_PUBLIC_GA_KEY}');`,
 				}}
 			></script>
 		</>
