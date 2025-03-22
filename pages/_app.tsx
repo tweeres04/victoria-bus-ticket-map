@@ -30,6 +30,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 						gtag('config', '${process.env.NEXT_PUBLIC_GA_KEY}');`,
 				}}
 			></script>
+			{/* Ahrefs analytics */}
+			<script
+				src="https://analytics.ahrefs.com/analytics.js"
+				data-key={process.env.NEXT_PUBLIC_AHREFS_ANALYTICS_KEY}
+				async
+			></script>
 		</>
 	)
 }
