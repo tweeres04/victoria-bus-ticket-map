@@ -17,31 +17,30 @@ const bounds =
 		: greaterVictoriaBounds
 
 export default async function scrape() {
-	const cityUrlPart =
+	const city =
 		process.env.NEXT_PUBLIC_CITY === 'kelowna' ? 'kelowna' : 'victoria'
 	try {
 		let {
 			data: { locations },
-		} = await scrapeIt(
-			`https://bctransit.com/${cityUrlPart}/fares/where-to-buy`,
-			{
-				locations: {
-					listItem: 'tr',
-					data: {
-						name: {
-							selector: 'td.column-1',
-							convert: (n: string) =>
-								startCase(n.replace('Umo', '').trim().toLowerCase()),
-						},
-						address: { selector: 'td.column-2' },
-						isUmo: {
-							selector: 'td.column-1',
-							convert: (n: string) => n.includes('Umo'),
-						},
+		} = await scrapeIt(`https://bctransit.com/${city}/fares/where-to-buy`, {
+			locations: {
+				listItem: 'table:first-of-type tr',
+				data: {
+					name: {
+						selector: 'td.column-1',
+						convert: (n: string) =>
+							startCase(n.replace('Umo', '').trim().toLowerCase()),
+					},
+					address: {
+						selector: city === 'victoria' ? 'td.column-3' : 'td.column-2',
+					},
+					isUmo: {
+						selector: 'td.column-1',
+						convert: (n: string) => n.includes('Umo'),
 					},
 				},
-			}
-		)
+			},
+		})
 		locations = locations.filter((l: Location) => l.address !== '')
 		locations = await Promise.all(
 			locations.map(async (l: Location) => {
