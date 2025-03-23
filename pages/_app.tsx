@@ -7,14 +7,20 @@ import '../lib/styles.scss'
 function MyApp({ Component, pageProps }: AppProps) {
 	const cityName =
 		process.env.NEXT_PUBLIC_CITY === 'kelowna' ? 'Kelowna' : 'Victoria'
-	const title = `A Map of Where to Buy ${cityName} Bus Tickets and Passes`
-	const description = `Easily find the nearest place to buy bus passes and tickets in ${cityName}. Every spot easily findable on a map. Umo locations labeled.`
+	const title = `A Map of Where to Buy Umo cards in ${cityName}`
+	const description = `Easily find the nearest place to buy Umo cards in ${cityName}. Every spot quickly findable on a map.`
+	const url = `https://${process.env.NEXT_PUBLIC_CITY}busticketmap.tweeres.ca`
 	return (
 		<>
 			<Head>
 				<title>{title}</title>
 				<meta name="description" content={description} />
+				<meta property="og:description" content={description} />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<link rel="canonical" href={url} />
+				<meta property="og:title" content={title} />
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content={url} />
 			</Head>
 			<Component {...pageProps} />
 			{/* Global site tag (gtag.js) - Google Analytics */}

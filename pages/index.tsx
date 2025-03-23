@@ -17,13 +17,16 @@ function Home() {
 						<div className="columns is-vcentered">
 							<div className="column">
 								<h1 className="title">
-									Easily find the nearest place to buy bus passes and tickets in{' '}
-									{cityName}
+									Easily find the nearest place to buy Umo cards in {cityName}
 								</h1>
 								<h2 className="subtitle">
-									Every spot easily findable on a map. Umo locations clearly
-									labeled.
+									Every spot quickly findable on a map.
 								</h2>
+								{cityName === 'Victoria' ? (
+									<p className="mb-5">
+										Helping bus riders find umo cards 125+ times per month
+									</p>
+								) : null}
 								<Link
 									href="/map"
 									className="button is-primary is-large is-inverted"
