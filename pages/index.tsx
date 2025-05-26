@@ -24,7 +24,7 @@ function Home() {
 								</h2>
 								{cityName === 'Victoria' ? (
 									<p className="mb-5">
-										Helping bus riders find umo cards 125+ times per month
+										Helping bus riders find umo cards 200+ times per month
 									</p>
 								) : null}
 								<Link
