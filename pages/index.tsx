@@ -38,7 +38,7 @@ function Home() {
 								<Link href="/map">
 									<Image
 										src={heroImageUrl}
-										alt={`Map with markers showing where to buy bus tickets in ${cityName}`}
+										alt={`Map with markers showing where to buy Umo cards in ${cityName}`}
 									/>
 								</Link>
 							</div>
@@ -49,7 +49,7 @@ function Home() {
 			<footer className="footer">
 				<div className="content has-text-centered">
 					<p>
-						{cityName} Bus Ticket Map by{' '}
+						{cityName} Umo Card Map by{' '}
 						<a href="https://tweeres.ca">Tyler Weeres</a>
 					</p>
 					<p>

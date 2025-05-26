@@ -7,7 +7,7 @@ export default function Document() {
 	const heroUrl = `https://${domain}/${heroFilename}`
 	const city =
 		process.env.NEXT_PUBLIC_CITY === 'kelowna' ? 'Kelowna' : 'Victoria'
-	const title = `${city} Bus Ticket Map`
+	const title = `${city} Umo Card Map`
 	return (
 		<Html lang="en">
 			<Head>
